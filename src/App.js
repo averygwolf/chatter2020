@@ -4,7 +4,7 @@ import NamePicker from './namePicker'
 
 function App() {
   const [messages, setMessages] = useState([])
-
+  const [name, setName] = useState('')
 
   return <main>
 
@@ -16,7 +16,7 @@ function App() {
       />
       Chatter
       </div>
-      <NamePicker onSave={name=>{}}/> 
+      <NamePicker onSave={setName}/> 
     </header>
 
     <div className='allmessages'>

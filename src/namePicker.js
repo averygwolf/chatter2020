@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import { FiEdit, FiSave } from 'react-icons/fi'
 
 function NamePicker(props){
@@ -10,9 +10,18 @@ function NamePicker(props){
         inputEl.current.focus()
         if (name && !showName) {
             props.onSave(name)
+            localStorage.setItem('name',name)
         }
         setShowName(!showName)
     }
+
+    useEffect(()=>{
+        const n = localStorage.getItem('name')
+        if(n) {
+            setName(n)
+            save()
+        }
+    }, [])
 
     return <div className='edit-username'>
        <input value={name} ref={inputEl} className='name-input'
