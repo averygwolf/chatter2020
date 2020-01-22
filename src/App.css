@@ -27,6 +27,8 @@ header{
   font-family: Roboto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  height: 48px;
 }
 
 .logo {
@@ -41,9 +43,15 @@ header{
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 40px;
+  height: 48px;
   border-top: 1px solid white;
   align-items: center;
+  margin-bottom: 5px;
+}
+
+.input:focus {
+  background: white;
+  color: black;
 }
 
 .button, .input {
@@ -53,6 +61,11 @@ header{
 .button {
   margin-top: 8px;
   border: solid white 1px;
+  margin-left: 3px;
+}
+.button:disabled {
+  background: grey;
+  color: black;
 }
 
 .sendbutton {
@@ -69,9 +82,60 @@ header{
   outline: none;
 }
 
-.message {
+.messages {
+  color: white;
+  background: black;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 3px 6px;
+  display: inline-block;
+}
+
+.allmessages {
+  height: calc(100vh - 96px);
+  position: absolute;
+  display: flex;
+  top: 48px;
+  flex-direction: column-reverse;
+  overflow-y: scroll;
+  left: 0px;
+  width: 100vw;
+}
+
+.text-wrapper {
+  width: 100%;
+}
+
+.logo-wrap {
+  display:flex;
+  align-items: center;
+}
+
+.name-button {
+  cursor: pointer;
+  padding: 4px;
+  background: transparent;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  height: 29px;
+  margin: 0 6px;
+}
+.name-button:hover{
+  background: rgba(255, 255,255,0.1)
+}
+.name-input{
+  height: 31px;
+  border-radius: 14px;
+  padding-left: 12px;
+  padding-bottom: px;
+  background: black;
+  color: white;
   border: solid white 1px;
-  font-family: roboto;
-  font-size: 12px;
-  
+  outline: none;
+}
+.edit-username {
+  display: flex;
+  align-items: center;
 }
