@@ -1,10 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import NamePicker from './namePicker'
+import {db} from './db'
 
 function App() {
   const [messages, setMessages] = useState([])
   const [name, setName] = useState('')
+
+useEffect(()=> {
+  db.listen({
+    receive: m=> {
+      setMessages(current=> [m, ...current])
+    }, 
+  })
+}, [])
 
   return <main>
 
@@ -22,24 +31,20 @@ function App() {
     <div className='allmessages'>
     {messages.map((m,i) => {
       return <div key={i} className='text-wrapper'> 
-        <div className='messages'>{m}</div> 
+        <div className='messages'>{m.text}</div> 
       </div>
       /* displays messages that are sent, looping through the message array and printing the message */
     })}
     </div>
 
     <TextInput onSend={t => {
-      setMessages([t, ...messages]) /* ... is called the spread operator, more functional operator, react likes it better*/
+      db.send({
+        text: t, name, ts: new Date(),
+      })
     }} />
     
   </main>
 }
-
-/* function Message() {
-  return <div className='message'>
-    <header> hey how is it going? </header>
-  </div> 
-} */
 
 function TextInput(props) {
   const [text, setText] = useState('')

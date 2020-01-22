@@ -49,11 +49,6 @@ header{
   margin-bottom: 5px;
 }
 
-.input:focus {
-  background: white;
-  color: black;
-}
-
 .button, .input {
   border-radius: 15px;
 }
@@ -80,6 +75,7 @@ header{
   width: 89%;
   border: solid white 1px;
   outline: none;
+  padding-left: 10px;
 }
 
 .messages {
