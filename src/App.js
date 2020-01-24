@@ -1,19 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import NamePicker from './namePicker'
-import {db} from './db'
+import {db, useDB} from './db'
 
 function App() {
-  const [messages, setMessages] = useState([])
   const [name, setName] = useState('')
-
-useEffect(()=> {
-  db.listen({
-    receive: m=> {
-      setMessages(current=> [m, ...current])
-    }, 
-  })
-}, [])
+  const messages = useDB()
 
   return <main>
 
@@ -31,6 +23,7 @@ useEffect(()=> {
     <div className='allmessages'>
     {messages.map((m,i) => {
       return <div key={i} className='text-wrapper'> 
+        <div className='msg-name'> {m.name}</div>
         <div className='messages'>{m.text}</div> 
       </div>
       /* displays messages that are sent, looping through the message array and printing the message */

@@ -135,3 +135,9 @@ header{
   display: flex;
   align-items: center;
 }
+
+.msg-name {
+  font-size: 10px;
+  padding-left: 7px;
+  color: black;
+}
