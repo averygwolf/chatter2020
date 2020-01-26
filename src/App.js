@@ -2,10 +2,24 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import NamePicker from './namePicker'
 import {db, useDB} from './db'
+import { BrowserRouter, Route } from 'react-router-dom'
+
 
 function App() {
+  useEffect(()=> {
+    const {pathname} = window.location /* destructuring format */
+    if(pathname.length<2) window.location.pathname='home'
+  }, [])
+  return <BrowserRouter>
+    <Route path='/:room' component={Room}/>
+  </BrowserRouter>
+}
+
+
+function Room(props) {
+  const {room} = props.match.params
   const [name, setName] = useState('')
-  const messages = useDB()
+  const messages = useDB(room)
 
   return <main>
 
@@ -22,7 +36,8 @@ function App() {
 
     <div className='allmessages'>
     {messages.map((m,i) => {
-      return <div key={i} className='text-wrapper'> 
+      return <div key={i} className='text-wrapper' 
+        from={m.name===name?'me':'you'}> 
         <div className='msg-name'> {m.name}</div>
         <div className='messages'>{m.text}</div> 
       </div>
@@ -32,7 +47,7 @@ function App() {
 
     <TextInput onSend={t => {
       db.send({
-        text: t, name, ts: new Date(),
+        text: t, name, ts: new Date(), room
       })
     }} />
     
